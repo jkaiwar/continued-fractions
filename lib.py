@@ -75,9 +75,9 @@ def dS(p,q,i):
 
 
 def list_invariants(p,q):
-    A = np.zeros(p-1).astype('object')
-    for i in range(p-1):
-        A[i] = (dS(p,q,i+1))
+    A = np.zeros(p).astype('object')
+    for i in range(p):
+        A[i] = (dS(p,q,i))
     return A
 
 
