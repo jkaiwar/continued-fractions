@@ -43,17 +43,41 @@ def d_inv(p,q,i):
         q = b
         count = count + 1
     return Fraction(ans).limit_denominator()
-   
- 
-for i in range(9):
-    print(d_inv(9,7,i))
+
+
+
+# Recursive d-invariant
+def dS(p,q,i):
+    # checking input values are positive integers
+    if ((not isinstance(p, int)) or (p <= 0)):
+        raise Exception('p must be a positive integer. p was {}.'.format(p))
+    
+    if ((not isinstance(q, int)) or (q <= 0)):
+        raise Exception('q must be a positive integer. q was {}.'.format(q))
+
+    if ((not isinstance(i, int)) or (i < 0)):
+        raise Exception('i must be a non-negative integer. i was {}.'.format(i))
+    
+    # checking p and q are coprime
+    if (np.gcd(p,q) != 1):
+        raise Exception('p and q must be coprime.')
+
+    # we terminate if p = 1
+    if (p == 1):
+        return Fraction(0,1)
+
+    q = q%p
+    i = i%p
+    r = Fraction(((((2*i) + 1 - p - q)**2) - p*q),(4*p*q))
+    # our recursive step is safe since we have checked for bad input and reduced q and i mod p.
+    return r - dS(q,p,i)
 
 
 
 def list_invariants(p,q):
     A = np.zeros(p-1).astype('object')
     for i in range(p-1):
-        A[i] = (d_inv(p,q,i+1))
+        A[i] = (dS(p,q,i+1))
     return A
 
 
