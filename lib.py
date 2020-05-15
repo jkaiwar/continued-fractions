@@ -89,5 +89,29 @@ def columns_repeat(A):
                 return False
     return True
     
+## Check if links are equivalent, error checking included
+def equivalent_link(s1,s2):
+    p1 = s1.numerator
+    p2 = s2.numerator
+    q1 = s1.denominator
+    q2 = s2.denominator
+    # ensuring input is correct in general
+    if ((not isinstance(p1, int)) or (p1 <= 0)):
+        raise Exception('p1 must be a positive integer. p1 was {}.'.format(p1))
+    
+    if ((not isinstance(q1, int)) or (q1 <= 0)):
+        raise Exception('q1 must be a positive integer. q1 was {}.'.format(q1))
 
-            
+    if ((not isinstance(p2, int)) or (p2 <= 0)):
+        raise Exception('p2 must be a positive integer. p2 was {}.'.format(p2))
+    
+    if ((not isinstance(q2, int)) or (q2 <= 0)):
+        raise Exception('q2 must be a positive integer. q2 was {}.'.format(q2))
+    # testing whether the corresponding links are equivalent
+    if  not (p1 == p2):
+        return False		# numerators must be equal.
+    
+    A = (q1%p1 == q2%p1)
+    B = ((q1*q2)%p1 == 1)
+    return (A or B)
+
