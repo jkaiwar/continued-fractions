@@ -52,8 +52,8 @@ def dS(p,q,i):
     if ((not isinstance(p, int)) or (p <= 0)):
         raise Exception('p must be a positive integer. p was {}.'.format(p))
     
-    if ((not isinstance(q, int)) or (q <= 0)):
-        raise Exception('q must be a positive integer. q was {}.'.format(q))
+    # if ((not isinstance(q, int)) or (q <= 0)):
+    #     raise Exception('q must be a positive integer. q was {}.'.format(q))
 
     if ((not isinstance(i, int)) or (i < 0)):
         raise Exception('i must be a non-negative integer. i was {}.'.format(i))
@@ -113,5 +113,5 @@ def equivalent_link(s1,s2):
     
     A = (q1%p1 == q2%p1)
     B = ((q1*q2)%p1 == 1)
-    return (A or B)
+    return (A ^ B) # either A or B
 
